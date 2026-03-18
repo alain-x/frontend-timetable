@@ -2,7 +2,7 @@
 // Requires your backend to expose VAPID public key at /api/push/vapidPublicKey
 
 // Prefer env, fallback to production backend host to ensure push works in Netlify build too
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8091';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://digital-timetable-backend-production.up.railway.app';
 const VAPID_PUBLIC_KEY_URL = `${API_BASE_URL}/api/push/vapidPublicKey`;
 const SUBSCRIBE_URL = `${API_BASE_URL}/api/push/subscribe`;
 

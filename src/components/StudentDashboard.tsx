@@ -108,7 +108,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ setMessage }) => {
         return;
       }
 
-      const res = await fetch('http://localhost:8091/api/timetables', {
+      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/timetables', {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -160,7 +160,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ setMessage }) => {
         return;
       }
 
-      const res = await fetch('http://localhost:8091/api/notifications', {
+      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/notifications', {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -217,12 +217,12 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ setMessage }) => {
       if (!token) return;
       let res;
       if (isAdmin) {
-        res = await fetch(`http://localhost:8091/api/notifications/${notificationId}`, {
+        res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/notifications/${notificationId}`, {
           method: 'DELETE',
           headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        res = await fetch(`http://localhost:8091/api/notifications/${notificationId}/dismiss`, {
+        res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/notifications/${notificationId}/dismiss`, {
           method: 'POST',
           headers: { Authorization: `Bearer ${token}` },
         });

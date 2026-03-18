@@ -357,7 +357,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
     setIntakeProgressLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:8091/api/admin/intakes/${intakeId}/course-completions`, {
+      const res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/admin/intakes/${intakeId}/course-completions`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -380,7 +380,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
   const handleToggleCourseCompletion = async (intakeId: number, courseId: number, completed: boolean) => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:8091/api/admin/intakes/${intakeId}/course-completions/${courseId}`, {
+      const res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/admin/intakes/${intakeId}/course-completions/${courseId}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -599,8 +599,8 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
       };
 
       const url = editingIntake
-        ? `http://localhost:8091/api/admin/intakes/${editingIntake.id}`
-        : 'http://localhost:8091/api/admin/intakes';
+        ? `https://digital-timetable-backend-production.up.railway.app/api/admin/intakes/${editingIntake.id}`
+        : 'https://digital-timetable-backend-production.up.railway.app/api/admin/intakes';
       const method = editingIntake ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
@@ -631,7 +631,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
     if (!window.confirm(`Delete intake "${intake.name}"?`)) return;
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:8091/api/admin/intakes/${intake.id}`, {
+      const res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/admin/intakes/${intake.id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -657,7 +657,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
     setIntakesLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8091/api/intakes', {
+      const response = await fetch('https://digital-timetable-backend-production.up.railway.app/api/intakes', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -691,7 +691,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
   const handleExportUsers = async (format: 'csv' | 'xlsx') => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:8091/api/users/export/${format}`, {
+      const res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/users/export/${format}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         }
@@ -719,7 +719,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
       const form = new FormData();
       form.append('file', file);
 
-      const res = await fetch(`http://localhost:8091/api/users/import/${format}`, {
+      const res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/users/import/${format}`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -745,7 +745,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
     if (!window.confirm('Delete this course completion request?')) return;
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8091/api/admin/course-completion-requests/${requestId}`, {
+      const response = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/admin/course-completion-requests/${requestId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -778,7 +778,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
     if (!window.confirm('Delete this timetable entry for all users?')) return;
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:8091/api/timetables/${timetableId}`, {
+      const res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/timetables/${timetableId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -867,7 +867,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8091/api/timetables', {
+      const response = await fetch('https://digital-timetable-backend-production.up.railway.app/api/timetables', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -890,7 +890,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
   const fetchSwapRequests = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8091/api/swap-requests', {
+      const response = await fetch('https://digital-timetable-backend-production.up.railway.app/api/swap-requests', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -926,7 +926,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
         setMessage({ type: 'error', text: 'No authentication token found. Please log in again.' });
         return;
       }
-      const res = await fetch('http://localhost:8091/api/notifications', {
+      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/notifications', {
         headers: { Authorization: `Bearer ${token}` },
       });
       let data;
@@ -964,7 +964,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
     try {
       const token = localStorage.getItem('token');
       if (!token) return;
-      await fetch(`http://localhost:8091/api/notifications/${notificationId}/dismiss`, {
+      await fetch(`https://digital-timetable-backend-production.up.railway.app/api/notifications/${notificationId}/dismiss`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -984,7 +984,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
     try {
       const token = localStorage.getItem('token');
       if (!token) return;
-      await fetch(`http://localhost:8091/api/notifications/${notificationId}`, {
+      await fetch(`https://digital-timetable-backend-production.up.railway.app/api/notifications/${notificationId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -1002,7 +1002,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8091/api/users', {
+      const response = await fetch('https://digital-timetable-backend-production.up.railway.app/api/users', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -1022,7 +1022,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
   const fetchRooms = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8091/api/rooms', {
+      const response = await fetch('https://digital-timetable-backend-production.up.railway.app/api/rooms', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -1050,7 +1050,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
   const fetchFaculties = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8091/api/faculties', {
+      const response = await fetch('https://digital-timetable-backend-production.up.railway.app/api/faculties', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -1076,7 +1076,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
   const fetchDepartments = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8091/api/departments', {
+      const response = await fetch('https://digital-timetable-backend-production.up.railway.app/api/departments', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -1116,7 +1116,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
   const fetchCourses = async () => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch('http://localhost:8091/api/courses', {
+    const response = await fetch('https://digital-timetable-backend-production.up.railway.app/api/courses', {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -1329,7 +1329,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
 // Resolve department names using ONLY the course detail endpoint to avoid hitting non-existent URLs
 const fetchCourseDepartmentsNames = async (courseId: number, token: string): Promise<string[]> => {
   const headers = { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' } as any;
-  const url = `http://localhost:8091/api/courses/${courseId}`;
+  const url = `https://digital-timetable-backend-production.up.railway.app/api/courses/${courseId}`;
   try {
     const res = await fetch(url, { headers });
     if (!res.ok) return [];
@@ -1386,7 +1386,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
 
     let response;
     if (editingCourse) {
-      response = await fetch(`http://localhost:8091/api/courses/${editingCourse.id}`, {
+      response = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/courses/${editingCourse.id}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -1395,7 +1395,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
         body: JSON.stringify(courseData)
       });
     } else {
-      response = await fetch('http://localhost:8091/api/courses', {
+      response = await fetch('https://digital-timetable-backend-production.up.railway.app/api/courses', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -1441,7 +1441,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
   const fetchCourseCompletionRequests = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8091/api/admin/course-completion-requests', {
+      const response = await fetch('https://digital-timetable-backend-production.up.railway.app/api/admin/course-completion-requests', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -1463,7 +1463,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
       const token = localStorage.getItem('token');
       const params = new URLSearchParams();
       params.append('adminNotes', notes || '');
-      const response = await fetch(`http://localhost:8091/api/swap-requests/${swapRequestId}/${action === 'approve' ? 'admin-approve' : 'admin-reject'}`, {
+      const response = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/swap-requests/${swapRequestId}/${action === 'approve' ? 'admin-approve' : 'admin-reject'}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -1498,7 +1498,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
   const handleCourseCompletionAction = async (requestId: number, action: 'approve' | 'reject', notes?: string) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`http://localhost:8091/api/admin/course-completion-requests/${requestId}/${action}`, {
+    const response = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/admin/course-completion-requests/${requestId}/${action}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -1539,11 +1539,11 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
       let method = 'POST';
       
       if (action === 'delete') {
-        endpoint = `http://localhost:8091/api/users/${userId}`;
+        endpoint = `https://digital-timetable-backend-production.up.railway.app/api/users/${userId}`;
         method = 'DELETE';
       } else {
         // Use unified toggle endpoint for activate/deactivate
-        endpoint = `http://localhost:8091/api/users/${userId}/toggle-status`;
+        endpoint = `https://digital-timetable-backend-production.up.railway.app/api/users/${userId}/toggle-status`;
         method = 'POST';
       }
       
@@ -1573,7 +1573,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8091/api/users/create', {
+      const response = await fetch('https://digital-timetable-backend-production.up.railway.app/api/users/create', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -1603,7 +1603,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
     
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8091/api/users/${editingUser.id}`, {
+      const response = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/users/${editingUser.id}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -1644,7 +1644,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8091/api/courses', {
+      const response = await fetch('https://digital-timetable-backend-production.up.railway.app/api/courses', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -1676,7 +1676,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8091/api/rooms', {
+      const response = await fetch('https://digital-timetable-backend-production.up.railway.app/api/rooms', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -1721,7 +1721,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
     
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8091/api/rooms/${editingRoom.id}`, {
+      const response = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/rooms/${editingRoom.id}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -1754,7 +1754,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
     if (!window.confirm('Are you sure you want to delete this room?')) return;
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8091/api/rooms/${roomId}`, {
+      const response = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/rooms/${roomId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -1773,7 +1773,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
     if (!window.confirm('Mark this room as available?')) return;
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:8091/api/rooms/${roomId}/unbook`, {
+      const res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/rooms/${roomId}/unbook`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -1796,7 +1796,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8091/api/departments', {
+      const response = await fetch('https://digital-timetable-backend-production.up.railway.app/api/departments', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -1833,7 +1833,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
     
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8091/api/faculties', {
+      const response = await fetch('https://digital-timetable-backend-production.up.railway.app/api/faculties', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -1880,7 +1880,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
     
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8091/api/faculties/${editingFaculty.id}`, {
+      const response = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/faculties/${editingFaculty.id}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -1912,7 +1912,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
     if (!window.confirm('Are you sure you want to delete this faculty?')) return;
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8091/api/faculties/${facultyId}`, {
+      const response = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/faculties/${facultyId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -2742,7 +2742,7 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
                                   const token = localStorage.getItem('token');
                                   console.log('Deleting department:', { departmentId: department.id, departmentName: department.department_name });
                                   
-                                  const response = await fetch(`http://localhost:8091/api/departments/${department.id}`, {
+                                  const response = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/departments/${department.id}`, {
                                     method: 'DELETE',
                                     headers: {
                                       'Authorization': `Bearer ${token}`,
@@ -2826,7 +2826,7 @@ const handleDepartmentSubmit = async (e) => {
     if (currentDepartmentId) {
       // Update existing department
       console.log('Updating department:', { currentDepartmentId, payload });
-      response = await fetch(`http://localhost:8091/api/departments/${currentDepartmentId}`, {
+      response = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/departments/${currentDepartmentId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -2836,7 +2836,7 @@ const handleDepartmentSubmit = async (e) => {
       });
     } else {
       // Create new department
-      response = await fetch('http://localhost:8091/api/departments', {
+      response = await fetch('https://digital-timetable-backend-production.up.railway.app/api/departments', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -3004,7 +3004,7 @@ const handleDepartmentSubmit = async (e) => {
     setDeletingCourseId(courseId);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8091/api/courses/${courseId}`, {
+      const response = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/courses/${courseId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
