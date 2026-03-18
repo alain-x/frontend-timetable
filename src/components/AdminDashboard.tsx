@@ -3246,8 +3246,8 @@ const handleDepartmentSubmit = async (e) => {
 
       {/* Create/Edit Intake Modal */}
       {showCreateIntakeModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-md relative p-6 dark:bg-neutral-900 dark:text-neutral-100 dark:border dark:border-neutral-700">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-3 sm:p-4 z-50">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-md sm:max-w-lg md:max-w-xl relative p-4 sm:p-6 dark:bg-neutral-900 dark:text-neutral-100 dark:border dark:border-neutral-700 max-h-[90vh] overflow-hidden">
             <button
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl"
               onClick={() => setShowCreateIntakeModal(false)}
@@ -3256,7 +3256,8 @@ const handleDepartmentSubmit = async (e) => {
             </button>
             <h3 className="text-xl font-bold mb-4 text-blue-600">{editingIntake ? 'Edit Intake' : 'Create Intake'}</h3>
 
-            <form onSubmit={handleSaveIntake} className="space-y-3">
+            <div className="overflow-y-auto pr-1 max-h-[calc(90vh-110px)]">
+              <form onSubmit={handleSaveIntake} className="space-y-3">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-neutral-300 mb-1">Name</label>
                 <input
@@ -3357,7 +3358,8 @@ const handleDepartmentSubmit = async (e) => {
               >
                 {editingIntake ? 'Update Intake' : 'Create Intake'}
               </button>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       )}
