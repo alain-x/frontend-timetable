@@ -17,6 +17,21 @@ export interface WebSocketMessage {
   headers?: Record<string, string>;
 }
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://digital-timetable-backend-production-49c7.up.railway.app';
+
+function toWebSocketBaseUrl(httpBaseUrl: string) {
+  try {
+    const url = new URL(httpBaseUrl);
+    url.protocol = url.protocol === 'https:' ? 'wss:' : 'ws:';
+    url.pathname = '';
+    url.search = '';
+    url.hash = '';
+    return url.toString().replace(/\/$/, '');
+  } catch {
+    return httpBaseUrl;
+  }
+}
+
 class WebSocketService {
   private ws: WebSocket | null = null;
   private isConnected = false;
@@ -49,9 +64,8 @@ class WebSocketService {
         return;
       }
       // Use native WebSocket endpoint
-      const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-      // Always connect to the backend service host; avoid using window.location.host (Netlify)
-      this.ws = new WebSocket(`${wsProtocol}://backend-ewab.onrender.com/ws/websocket`);
+      const wsBaseUrl = import.meta.env.VITE_WS_BASE_URL || toWebSocketBaseUrl(API_BASE_URL);
+      this.ws = new WebSocket(`${wsBaseUrl}/ws/raw`);
       
       this.ws.onopen = () => {
         console.log('WebSocket connected');
