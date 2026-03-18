@@ -102,7 +102,7 @@ self.addEventListener('fetch', (event) => {
         const respClone = resp.clone();
         caches.open(CACHE_NAME).then((cache) => cache.put(req, respClone));
         return resp;
-      }).catch(() => caches.match(req)))
+      }).catch(() => caches.match(req).then((fallback) => fallback || new Response('', { status: 504 }))))
     );
     return;
   }
@@ -119,7 +119,7 @@ self.addEventListener('fetch', (event) => {
             caches.open(CACHE_NAME).then((cache) => cache.put(req, clone));
             return resp;
           })
-          .catch(() => caches.match(req))
+          .catch(() => caches.match(req).then((fallback) => fallback || new Response('', { status: 504 })))
       );
     } else {
       event.respondWith(
