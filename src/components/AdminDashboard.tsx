@@ -386,11 +386,16 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ completed })
+        body: JSON.stringify({ completed: Boolean(completed) })
       });
       const payload = await res.json().catch(() => null);
+      const rawText = payload == null ? await res.text().catch(() => '') : '';
       if (!res.ok) {
-        setMessage({ type: 'error', text: (payload && (payload.message || payload.error)) || 'Failed to update completion' });
+        const msg =
+          (payload && (payload.message || payload.error)) ||
+          rawText ||
+          'Failed to update completion';
+        setMessage({ type: 'error', text: `(${res.status}) ${msg}` });
         return;
       }
       setMessage({ type: 'success', text: completed ? 'Marked completed' : 'Marked not completed' });
@@ -400,7 +405,7 @@ const Dashboard: FC<DashboardProps> = ({ setMessage }) => {
         window.dispatchEvent(new Event('timetables:invalidate'));
       } catch {}
     } catch {
-      setMessage({ type: 'error', text: 'Failed to update completion' });
+      setMessage({ type: 'error', text: 'Failed to update completion (network error)' });
     }
   };
 
