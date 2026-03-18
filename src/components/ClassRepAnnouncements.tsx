@@ -36,7 +36,7 @@ const ClassRepAnnouncements: React.FC = () => {
     setError(null);
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/announcements', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/announcements', {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error('Failed to fetch announcements');
@@ -87,7 +87,7 @@ const ClassRepAnnouncements: React.FC = () => {
       // Class Rep can only send to Students
       const roles = ['STUDENT'];
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/announcements', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/announcements', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -183,7 +183,7 @@ const NotificationPanel: React.FC<NotificationPanelProps> = ({ setMessage }) => 
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/notifications', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/notifications', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -211,7 +211,7 @@ const NotificationPanel: React.FC<NotificationPanelProps> = ({ setMessage }) => 
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/notifications/${notificationId}/read`, {
+      const res = await fetch(`https://digital-timetable-backend-production-49c7.up.railway.app/api/notifications/${notificationId}/read`, {
         method: 'PUT',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -232,7 +232,7 @@ const NotificationPanel: React.FC<NotificationPanelProps> = ({ setMessage }) => 
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/notifications/mark-all-read', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/notifications/mark-all-read', {
         method: 'PUT',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -253,12 +253,12 @@ const NotificationPanel: React.FC<NotificationPanelProps> = ({ setMessage }) => 
       if (!token) return;
       let res;
       if (isAdmin) {
-        res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/notifications/${notificationId}`, {
+        res = await fetch(`https://digital-timetable-backend-production-49c7.up.railway.app/api/notifications/${notificationId}`, {
           method: 'DELETE',
           headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/notifications/${notificationId}/dismiss`, {
+        res = await fetch(`https://digital-timetable-backend-production-49c7.up.railway.app/api/notifications/${notificationId}/dismiss`, {
           method: 'POST',
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -282,7 +282,7 @@ const NotificationPanel: React.FC<NotificationPanelProps> = ({ setMessage }) => 
     try {
       const token = localStorage.getItem('token');
       if (!token) return;
-      const res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/notifications/${notificationId}/dismiss`, {
+      const res = await fetch(`https://digital-timetable-backend-production-49c7.up.railway.app/api/notifications/${notificationId}/dismiss`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
       });

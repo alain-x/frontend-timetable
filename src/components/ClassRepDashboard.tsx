@@ -159,7 +159,7 @@ const ClassRepDashboard: React.FC<ClassRepDashboardProps> = ({ setMessage }) => 
         return;
       }
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/timetables', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/timetables', {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -199,7 +199,7 @@ const ClassRepDashboard: React.FC<ClassRepDashboardProps> = ({ setMessage }) => 
         return;
       }
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/swap-requests', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/swap-requests', {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -239,7 +239,7 @@ const ClassRepDashboard: React.FC<ClassRepDashboardProps> = ({ setMessage }) => 
         return;
       }
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/notifications', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/notifications', {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -299,7 +299,7 @@ const ClassRepDashboard: React.FC<ClassRepDashboardProps> = ({ setMessage }) => 
       }
 
       // Fetch only available rooms from backend
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/rooms/available', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/rooms/available', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -342,7 +342,7 @@ const ClassRepDashboard: React.FC<ClassRepDashboardProps> = ({ setMessage }) => 
     try {
       const token = localStorage.getItem('token');
       if (!token) return;
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/users', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/users', {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.ok) {
@@ -362,7 +362,7 @@ const ClassRepDashboard: React.FC<ClassRepDashboardProps> = ({ setMessage }) => 
         return;
       }
 
-      const res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/swap-requests/${swapRequestId}/${action}`, {
+      const res = await fetch(`https://digital-timetable-backend-production-49c7.up.railway.app/api/swap-requests/${swapRequestId}/${action}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -421,7 +421,7 @@ const ClassRepDashboard: React.FC<ClassRepDashboardProps> = ({ setMessage }) => 
       };
 
       console.log('Submitting swap request payload:', payload);
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/swap-requests', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/swap-requests', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -464,7 +464,7 @@ const ClassRepDashboard: React.FC<ClassRepDashboardProps> = ({ setMessage }) => 
       }
 
       const res = await fetch(
-        `https://digital-timetable-backend-production.up.railway.app/api/rooms/${selectedRoom}/book?timetableId=${selectedTimetable.id}`,
+        `https://digital-timetable-backend-production-49c7.up.railway.app/api/rooms/${selectedRoom}/book?timetableId=${selectedTimetable.id}`,
         {
           method: 'POST',
           headers: {
@@ -502,7 +502,7 @@ const ClassRepDashboard: React.FC<ClassRepDashboardProps> = ({ setMessage }) => 
         setMessage({ type: 'error', text: 'No authentication token found. Please log in again.' });
         return;
       }
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/rooms/request', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/rooms/request', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -541,12 +541,12 @@ const ClassRepDashboard: React.FC<ClassRepDashboardProps> = ({ setMessage }) => 
       if (!token) return;
       let res;
       if (isAdmin) {
-        res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/notifications/${notificationId}`, {
+        res = await fetch(`https://digital-timetable-backend-production-49c7.up.railway.app/api/notifications/${notificationId}`, {
           method: 'DELETE',
           headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/notifications/${notificationId}/dismiss`, {
+        res = await fetch(`https://digital-timetable-backend-production-49c7.up.railway.app/api/notifications/${notificationId}/dismiss`, {
           method: 'POST',
           headers: { Authorization: `Bearer ${token}` },
         });

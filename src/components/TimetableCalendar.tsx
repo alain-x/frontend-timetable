@@ -146,7 +146,7 @@ const TimetableCalendar: FC<TimetableCalendarProps> = ({ setMessage, isAdmin = f
         return;
       }
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/intakes', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/intakes', {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.status === 401 || res.status === 403) {
@@ -173,7 +173,7 @@ const TimetableCalendar: FC<TimetableCalendarProps> = ({ setMessage, isAdmin = f
         return;
       }
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/users', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/users', {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.status === 401 || res.status === 403) {
@@ -207,8 +207,8 @@ const TimetableCalendar: FC<TimetableCalendarProps> = ({ setMessage, isAdmin = f
 
       // Use lecturer-specific endpoint if lecturerId is provided
       const endpoint = lecturerId 
-        ? `https://digital-timetable-backend-production.up.railway.app/api/lecturer/my-timetables?lecturerId=${lecturerId}`
-        : 'https://digital-timetable-backend-production.up.railway.app/api/timetables';
+        ? `https://digital-timetable-backend-production-49c7.up.railway.app/api/lecturer/my-timetables?lecturerId=${lecturerId}`
+        : 'https://digital-timetable-backend-production-49c7.up.railway.app/api/timetables';
       
       const res = await fetchWithTimeout(endpoint, {
         headers: { Authorization: `Bearer ${token}` },
@@ -340,7 +340,7 @@ const TimetableCalendar: FC<TimetableCalendarProps> = ({ setMessage, isAdmin = f
         return;
       }
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/faculties', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/faculties', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -382,7 +382,7 @@ const TimetableCalendar: FC<TimetableCalendarProps> = ({ setMessage, isAdmin = f
         return;
       }
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/departments', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/departments', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -428,7 +428,7 @@ const TimetableCalendar: FC<TimetableCalendarProps> = ({ setMessage, isAdmin = f
         return;
       }
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/courses', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/courses', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -487,7 +487,7 @@ const TimetableCalendar: FC<TimetableCalendarProps> = ({ setMessage, isAdmin = f
         return;
       }
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/rooms', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/rooms', {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -542,7 +542,7 @@ const TimetableCalendar: FC<TimetableCalendarProps> = ({ setMessage, isAdmin = f
         return;
       }
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/users', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/users', {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -727,7 +727,7 @@ const TimetableCalendar: FC<TimetableCalendarProps> = ({ setMessage, isAdmin = f
       // Fire request with timeout and reconcile in background
       (async () => {
         try {
-          const res = await fetchWithTimeout('https://digital-timetable-backend-production.up.railway.app/api/timetables', {
+          const res = await fetchWithTimeout('https://digital-timetable-backend-production-49c7.up.railway.app/api/timetables', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -813,7 +813,7 @@ const TimetableCalendar: FC<TimetableCalendarProps> = ({ setMessage, isAdmin = f
       // Fire request with timeout and reconcile; rollback on failure
       (async () => {
         try {
-          const res = await fetchWithTimeout(`https://digital-timetable-backend-production.up.railway.app/api/timetables/${editingEvent.id}`, {
+          const res = await fetchWithTimeout(`https://digital-timetable-backend-production-49c7.up.railway.app/api/timetables/${editingEvent.id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -868,7 +868,7 @@ const TimetableCalendar: FC<TimetableCalendarProps> = ({ setMessage, isAdmin = f
       // Fire request with timeout and rollback on failure
       (async () => {
         try {
-          const res = await fetchWithTimeout(`https://digital-timetable-backend-production.up.railway.app/api/timetables/${editingEvent.id}`, {
+          const res = await fetchWithTimeout(`https://digital-timetable-backend-production-49c7.up.railway.app/api/timetables/${editingEvent.id}`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${token}` },
             timeoutMs: 8000,

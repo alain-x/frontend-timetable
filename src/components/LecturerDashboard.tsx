@@ -55,7 +55,7 @@ const LecturerDashboard: React.FC<LecturerDashboardProps> = ({ setMessage }) => 
       if (!token) return;
       
       // Fetch lecturer's timetables
-      const timetableRes = await fetch('https://digital-timetable-backend-production.up.railway.app/api/lecturer/my-timetables', {
+      const timetableRes = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/lecturer/my-timetables', {
         headers: { Authorization: `Bearer ${token}` },
       });
       let timetables: any[] = [];
@@ -66,7 +66,7 @@ const LecturerDashboard: React.FC<LecturerDashboardProps> = ({ setMessage }) => 
       }
 
       // Fetch all timetables
-      const allTimetablesRes = await fetch('https://digital-timetable-backend-production.up.railway.app/api/timetables', {
+      const allTimetablesRes = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/timetables', {
         headers: { Authorization: `Bearer ${token}` },
       });
       let allTimetables: any[] = [];
@@ -77,7 +77,7 @@ const LecturerDashboard: React.FC<LecturerDashboardProps> = ({ setMessage }) => 
       }
 
       // Fetch all rooms
-      const roomRes = await fetch('https://digital-timetable-backend-production.up.railway.app/api/rooms', {
+      const roomRes = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/rooms', {
         headers: { Authorization: `Bearer ${token}` },
       });
       let rooms: any[] = [];
@@ -90,7 +90,7 @@ const LecturerDashboard: React.FC<LecturerDashboardProps> = ({ setMessage }) => 
       }
 
       // Fetch all lecturers
-      const lecturersRes = await fetch('https://digital-timetable-backend-production.up.railway.app/api/users/lecturers', {
+      const lecturersRes = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/users/lecturers', {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (lecturersRes.ok) {
@@ -130,7 +130,7 @@ const LecturerDashboard: React.FC<LecturerDashboardProps> = ({ setMessage }) => 
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/lecturer/my-timetables', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/lecturer/my-timetables', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -148,7 +148,7 @@ const LecturerDashboard: React.FC<LecturerDashboardProps> = ({ setMessage }) => 
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/swap-requests', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/swap-requests', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -166,7 +166,7 @@ const LecturerDashboard: React.FC<LecturerDashboardProps> = ({ setMessage }) => 
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/notifications', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/notifications', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -185,7 +185,7 @@ const LecturerDashboard: React.FC<LecturerDashboardProps> = ({ setMessage }) => 
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/lecturer/my-courses', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/lecturer/my-courses', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -193,7 +193,7 @@ const LecturerDashboard: React.FC<LecturerDashboardProps> = ({ setMessage }) => 
         const data = await res.json();
         const courses = Array.isArray(data?.data) ? data.data : [];
         
-        const completionRes = await fetch('https://digital-timetable-backend-production.up.railway.app/api/lecturer/course-completion-requests', {
+        const completionRes = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/lecturer/course-completion-requests', {
           headers: { Authorization: `Bearer ${token}` },
         });
         
@@ -225,7 +225,7 @@ const LecturerDashboard: React.FC<LecturerDashboardProps> = ({ setMessage }) => 
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/lecturer/course-completion-requests', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/lecturer/course-completion-requests', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -267,7 +267,7 @@ const LecturerDashboard: React.FC<LecturerDashboardProps> = ({ setMessage }) => 
         notes: completionNotes,
       };
 
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/lecturer/course-completion-request', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/lecturer/course-completion-request', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -677,7 +677,7 @@ const LecturerDashboard: React.FC<LecturerDashboardProps> = ({ setMessage }) => 
         reason: swapForm.reason || ''
       };
       
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/swap-requests', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/swap-requests', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -713,7 +713,7 @@ const LecturerDashboard: React.FC<LecturerDashboardProps> = ({ setMessage }) => 
     try {
       const token = localStorage.getItem('token');
       if (!token) throw new Error('No token');
-      const res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/swap-requests/${id}/approve?notes=`, {
+      const res = await fetch(`https://digital-timetable-backend-production-49c7.up.railway.app/api/swap-requests/${id}/approve?notes=`, {
         method: 'PUT',
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -738,7 +738,7 @@ const LecturerDashboard: React.FC<LecturerDashboardProps> = ({ setMessage }) => 
     try {
       const token = localStorage.getItem('token');
       if (!token) throw new Error('No token');
-      const res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/swap-requests/${id}/reject?notes=`, {
+      const res = await fetch(`https://digital-timetable-backend-production-49c7.up.railway.app/api/swap-requests/${id}/reject?notes=`, {
         method: 'PUT',
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -763,7 +763,7 @@ const LecturerDashboard: React.FC<LecturerDashboardProps> = ({ setMessage }) => 
     try {
       const token = localStorage.getItem('token');
       if (!token) throw new Error('No token');
-      const res = await fetch(`https://digital-timetable-backend-production.up.railway.app/api/swap-requests/${id}/cancel`, {
+      const res = await fetch(`https://digital-timetable-backend-production-49c7.up.railway.app/api/swap-requests/${id}/cancel`, {
         method: 'PUT',
         headers: { Authorization: `Bearer ${token}` }
       });

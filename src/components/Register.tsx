@@ -104,7 +104,7 @@ const handleSubmit = async (e: React.FormEvent) => {
       return;
     }
     try {
-      const res = await fetch('https://digital-timetable-backend-production.up.railway.app/api/auth/register', {
+      const res = await fetch('https://digital-timetable-backend-production-49c7.up.railway.app/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
