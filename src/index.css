@@ -1,0 +1,463 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  
+  body {
+    @apply bg-neutral-50 text-neutral-900 font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    /* Improve touch scrolling on mobile */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Prevent zoom on input focus on iOS */
+  input, select, textarea {
+    font-size: 16px;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-neutral-100 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-300 rounded-full hover:bg-neutral-400 transition-colors;
+  }
+  
+  /* Selection styles */
+  ::selection {
+    @apply bg-primary-200 text-primary-900;
+  }
+  
+  /* Mobile-specific improvements */
+  @media (max-width: 768px) {
+    /* Improve touch targets */
+    button, a, [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Prevent horizontal scroll */
+    body {
+      overflow-x: hidden;
+    }
+    
+    /* Ensure main content takes full width on mobile */
+    .dashboard-content {
+      width: 100% !important;
+      margin-left: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 16px !important;
+    }
+    
+    /* Sidebar positioning on mobile - completely removed from layout flow */
+    .sidebar-mobile {
+      position: fixed !important;
+      left: 0 !important;
+      top: 0 !important;
+      bottom: 0 !important;
+      z-index: 50 !important;
+      transform: translateX(-100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
+      /* Remove from layout flow */
+      position: absolute !important;
+      width: 0 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+    }
+    
+    .sidebar-mobile.open {
+      transform: translateX(0);
+      width: 256px !important;
+      height: 100vh !important;
+      overflow: visible !important;
+    }
+    
+    /* Sidebar overlay background */
+    .sidebar-overlay {
+      position: fixed !important;
+      inset: 0 !important;
+      background-color: rgba(0, 0, 0, 0.5) !important;
+      z-index: 40 !important;
+      transition: opacity 0.3s ease;
+    }
+    
+    /* Ensure flex container doesn't reserve space for sidebar on mobile */
+    .dashboard-flex-container {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    
+    .dashboard-flex-container > *:not(.sidebar-mobile) {
+      width: 100% !important;
+      flex: 1 !important;
+    }
+    
+    /* Smooth sidebar animations */
+    .sidebar-transition {
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Better touch feedback */
+    .touch-feedback {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+  }
+}
+
+@layer components {
+  /* Button variants */
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed touch-feedback;
+  }
+  
+  .btn-primary {
+    @apply bg-[#004aad] text-white shadow-soft hover:shadow-medium hover:scale-105 active:scale-95 focus:ring-[#004aad];
+  }
+  
+  .btn-secondary {
+    @apply bg-[#004aad] text-white shadow-soft hover:shadow-medium hover:scale-105 active:scale-95 focus:ring-[#004aad];
+  }
+  
+  .btn-success {
+    @apply bg-[#004aad] text-white shadow-soft hover:shadow-medium hover:scale-105 active:scale-95 focus:ring-[#004aad];
+  }
+  
+  .btn-warning {
+    @apply bg-[#004aad] text-white shadow-soft hover:shadow-medium hover:scale-105 active:scale-95 focus:ring-[#004aad];
+  }
+  
+  .btn-danger {
+    @apply bg-[#004aad] text-white shadow-soft hover:shadow-medium hover:scale-105 active:scale-95 focus:ring-[#004aad];
+  }
+  
+  .btn-outline {
+    @apply btn border-2 border-neutral-300 bg-white text-neutral-700 hover:bg-neutral-50 hover:border-neutral-400 focus:ring-neutral-500;
+  }
+  
+  .btn-ghost {
+    @apply btn bg-transparent text-neutral-700 hover:bg-neutral-100 focus:ring-neutral-500;
+  }
+  
+  /* Input styles */
+  .input {
+    @apply w-full px-4 py-3 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 hover:border-neutral-400
+      border border-neutral-300 bg-white text-neutral-900 placeholder-neutral-500 focus:ring-primary-500 focus:border-primary-500
+      dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100 dark:placeholder-neutral-400 dark:hover:border-neutral-600 dark:focus:ring-primary-400 dark:focus:border-primary-400;
+  }
+  
+  .input-error {
+    @apply input border-danger-300 focus:ring-danger-500 focus:border-danger-500 dark:border-danger-400 dark:focus:ring-danger-400 dark:focus:border-danger-400;
+  }
+
+  /* Ensure all form controls remain readable in dark mode project-wide */
+  .dark input,
+  .dark select,
+  .dark textarea {
+    @apply bg-neutral-800 text-neutral-100 placeholder-neutral-400 border-neutral-700;
+  }
+
+  .dark input:focus,
+  .dark select:focus,
+  .dark textarea:focus {
+    @apply ring-2 ring-primary-400 border-primary-400 outline-none;
+  }
+  
+  /* Card styles */
+  .card {
+    @apply bg-white rounded-xl shadow-soft border border-neutral-200 overflow-hidden;
+  }
+  
+  .card-hover {
+    @apply card hover:shadow-medium hover:scale-[1.02] transition-all duration-300;
+  }
+  
+  /* Badge styles */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .badge-primary {
+    @apply badge bg-primary-100 text-primary-800;
+  }
+  
+  .badge-secondary {
+    @apply badge bg-secondary-100 text-secondary-800;
+  }
+  
+  .badge-success {
+    @apply badge bg-success-100 text-success-800;
+  }
+  
+  .badge-warning {
+    @apply badge bg-warning-100 text-warning-800;
+  }
+  
+  .badge-danger {
+    @apply badge bg-danger-100 text-danger-800;
+  }
+  
+  .badge-neutral {
+    @apply badge bg-neutral-100 text-neutral-800;
+  }
+  
+  /* Modal styles */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4;
+  }
+  
+  .modal-content {
+    @apply bg-white rounded-2xl shadow-strong max-w-md w-full max-h-[90vh] overflow-y-auto animate-scale-in
+      dark:bg-neutral-900 dark:text-neutral-100 dark:border dark:border-neutral-700;
+  }
+  
+  /* Loading spinner */
+  .spinner {
+    @apply animate-spin rounded-full border-2 border-neutral-300 border-t-primary-600;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    @apply text-[#004aad];
+  }
+  
+  /* Glass effect */
+  .glass {
+    @apply bg-white/80 backdrop-blur-md border border-white/20;
+  }
+
+  .dark .glass {
+    @apply bg-neutral-900/80 border-neutral-800/60;
+  }
+  
+  /* Floating animation */
+  .float {
+    @apply animate-float;
+  }
+  
+  /* Glow effects */
+  .glow-primary {
+    @apply shadow-glow;
+  }
+  
+  .glow-success {
+    @apply shadow-glow-success;
+  }
+  
+  .glow-warning {
+    @apply shadow-glow-warning;
+  }
+  
+  .glow-danger {
+    @apply shadow-glow-danger;
+  }
+  
+  /* Sidebar specific styles */
+  .sidebar {
+    @apply flex flex-col w-64 h-screen bg-white border-r border-neutral-200 shadow-sm p-3 sm:p-4 sticky top-0 z-40 sidebar-transition;
+  }
+  
+  .sidebar-mobile {
+    @apply fixed inset-y-0 left-0 z-50 transform transition-transform duration-300 ease-in-out;
+  }
+  
+  .sidebar-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-30 z-40 transition-opacity duration-300;
+  }
+  
+  /* Navigation specific styles */
+  .nav-container {
+    @apply bg-white shadow-soft border-b border-neutral-200;
+  }
+  
+  .nav-content {
+    @apply max-w-7xl mx-auto px-3 sm:px-4 lg:px-8;
+  }
+  
+  .nav-bar {
+    @apply flex justify-between h-14 sm:h-16;
+  }
+  
+  .nav-brand {
+    @apply flex items-center;
+  }
+  
+  .nav-logo {
+    @apply w-7 h-7 sm:w-8 sm:h-8 bg-[#004aad] rounded-lg flex items-center justify-center mr-2 sm:mr-3;
+  }
+  
+  .nav-title {
+    @apply text-lg sm:text-xl font-bold text-[#004aad];
+  }
+  
+  .nav-subtitle {
+    @apply text-xs text-neutral-500 capitalize hidden sm:block;
+  }
+  
+  .nav-tabs {
+    @apply hidden md:flex items-center space-x-1 overflow-x-auto scrollbar-hide max-w-4xl;
+  }
+  
+  .nav-tab {
+    @apply px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-2 touch-feedback;
+  }
+  
+  .nav-tab-active {
+    @apply bg-primary-100 text-primary-700 shadow-sm;
+  }
+  
+  .nav-tab-inactive {
+    @apply text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100;
+  }
+  
+  .nav-actions {
+    @apply flex items-center space-x-2 sm:space-x-4;
+  }
+  
+  .nav-menu-btn {
+    @apply md:hidden p-2 sm:p-3 text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors touch-feedback;
+  }
+}
+
+@layer utilities {
+  /* Text utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  .animate-slide-down {
+    animation: slideDown 0.3s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+  
+  .animate-bounce-in {
+    animation: bounceIn 0.6s ease-out;
+  }
+  
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-transform duration-200 hover:-translate-y-1;
+  }
+  
+  .hover-glow {
+    @apply transition-shadow duration-200 hover:shadow-glow;
+  }
+  
+  /* Focus styles */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  }
+  
+  /* Responsive text */
+  .text-responsive {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+  
+  /* Aspect ratios */
+  .aspect-video {
+    aspect-ratio: 16 / 9;
+  }
+  
+  .aspect-square {
+    aspect-ratio: 1 / 1;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  
+  /* Mobile utilities */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-area-left {
+    padding-left: env(safe-area-inset-left);
+  }
+  
+  .safe-area-right {
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Dark mode: enforce dark styling for ALL form controls project-wide */
+  .dark input,
+  .dark select,
+  .dark textarea,
+  .dark [contenteditable="true"] {
+    @apply bg-neutral-800 text-neutral-100 placeholder-neutral-400 border-neutral-700;
+  }
+
+  .dark input:focus,
+  .dark select:focus,
+  .dark textarea:focus {
+    @apply ring-2 ring-primary-400 border-primary-400 outline-none;
+  }
+
+  /* Date/time pickers and third-party inputs common wrapper */
+  .dark .react-datepicker__input-container input,
+  .dark .rdp input {
+    @apply bg-neutral-800 text-neutral-100 placeholder-neutral-400 border-neutral-700;
+  }
+
+  /* Global dark-mode overrides for common light-only Tailwind classes.
+     This makes the app look professional in dark mode even if some components
+     forgot to add dark: variants. */
+  .dark .bg-white { @apply bg-neutral-900; }
+  .dark .bg-gray-50 { @apply bg-neutral-950; }
+  .dark .bg-gray-100 { @apply bg-neutral-900; }
+  .dark .bg-gray-200 { @apply bg-neutral-800; }
+  .dark .bg-gray-300 { @apply bg-neutral-800; }
+  .dark .bg-gray-900 { @apply bg-neutral-950; }
+
+  .dark .text-gray-900 { @apply text-neutral-100; }
+  .dark .text-gray-800 { @apply text-neutral-100; }
+  .dark .text-gray-700 { @apply text-neutral-200; }
+  .dark .text-gray-600 { @apply text-neutral-300; }
+  .dark .text-gray-500 { @apply text-neutral-400; }
+  .dark .text-gray-400 { @apply text-neutral-400; }
+
+  .dark .border-gray-200 { @apply border-neutral-800; }
+  .dark .border-gray-300 { @apply border-neutral-700; }
+  .dark .border-gray-100 { @apply border-neutral-800; }
+  .dark .divide-gray-200 > :not([hidden]) ~ :not([hidden]) { @apply border-neutral-800; }
+
+  .dark .shadow-sm { @apply shadow-none; }
+  .dark .shadow { @apply shadow-none; }
+  .dark .shadow-md { @apply shadow-none; }
+  .dark .shadow-lg { @apply shadow-none; }
+}
+ 

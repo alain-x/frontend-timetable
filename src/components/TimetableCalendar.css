@@ -1,0 +1,100 @@
+ /* TimetableCalendar responsive and polish overrides */
+
+/* Root container helpers */
+.timetable-calendar {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scroll momentum on iOS */
+.timetable-calendar * {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Calendar container: allow horizontal scroll on small screens */
+@media (max-width: 768px) {
+  /* The p-6 wrapper inside the white card that contains the grids */
+  .timetable-calendar .bg-white.rounded-2xl.shadow-xl.overflow-hidden > .p-6 {
+    overflow-x: auto;
+  }
+
+  /* Weekday header grid and days grid */
+  .timetable-calendar .grid.grid-cols-7 {
+    /* Make the grid as wide as its content so the wrapper can scroll horizontally */
+    width: max-content;
+    grid-template-columns: repeat(7, 160px) !important; /* wider columns for readability */
+  }
+
+  /* Day cell minimum height reduction on mobile to reduce vertical scroll */
+  .timetable-calendar .grid.grid-cols-7 > div {
+    min-height: 120px; /* override min-h-[140px] when present */
+  }
+
+  /* Reduce paddings and gaps inside calendar for compact mobile view */
+  .timetable-calendar .p-6 { padding: 1rem; }
+  .timetable-calendar .gap-2 { gap: 0.375rem; }
+}
+
+/* Hide extra-scrollbar visually (keeps accessibility) */
+.timetable-calendar .bg-white.rounded-2xl.shadow-xl.overflow-hidden > .p-6::-webkit-scrollbar {
+  height: 8px;
+}
+.timetable-calendar .bg-white.rounded-2xl.shadow-xl.overflow-hidden > .p-6::-webkit-scrollbar-track {
+  background: transparent;
+}
+.timetable-calendar .bg-white.rounded-2xl.shadow-xl.overflow-hidden > .p-6::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.15);
+  border-radius: 9999px;
+}
+
+.dark .timetable-calendar .bg-white.rounded-2xl.shadow-xl.overflow-hidden > .p-6::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.2);
+}
+
+/* Event chip readability improvements */
+.timetable-calendar .truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Utility to ensure titles don’t overflow in cards */
+.timetable-calendar h3,
+.timetable-calendar h2 {
+  word-break: break-word;
+}
+
+/* Improve tap targets on mobile for key buttons */
+@media (max-width: 640px) {
+  .timetable-calendar button {
+    min-height: 40px;
+  }
+}
+
+/* List and timeline spacing tweaks for small screens */
+@media (max-width: 768px) {
+  .timetable-calendar .space-y-4 > * { margin-top: 0.75rem; margin-bottom: 0; }
+  .timetable-calendar .space-y-6 > * { margin-top: 1rem; margin-bottom: 0; }
+}
+
+/* Toast notifications must appear above modals/forms */
+/* Support for React-Toastify and React Hot Toast containers */
+.Toastify__toast-container,
+.timetable-calendar .Toastify__toast-container {
+  z-index: 999999 !important; /* higher than modals */
+  position: fixed !important;
+}
+
+#react-hot-toast,
+.timetable-calendar #react-hot-toast,
+.react-hot-toast,
+.timetable-calendar .react-hot-toast {
+  z-index: 999999 !important;
+  position: fixed !important;
+}
+
+/* Optional: ensure toasts aren’t clipped by parents */
+.timetable-calendar,
+.timetable-calendar * {
+  contain: paint;
+}
