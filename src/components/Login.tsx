@@ -131,6 +131,11 @@ const handleSubmit = async (e: React.FormEvent) => {
           <form onSubmit={handleSubmit} className="glass p-6 rounded-2xl shadow-strong animate-bounce-in max-w-sm mx-auto dark:bg-neutral-900 dark:text-neutral-100 dark:border dark:border-neutral-800">
             {/* Logo/Brand */}
             <div className="text-center mb-6"> 
+              <img
+                src={leftImage}
+                alt="Digital Timetable"
+                className="md:hidden w-24 h-24 object-contain mx-auto mb-4"
+              />
               <h2 className="text-2xl font-bold text-[#004aad] mb-1">Welcome Back to Digital Timetable</h2>
             </div>
 

@@ -14,8 +14,7 @@ createRoot(document.getElementById('root')!).render(
 )
 
 // Defer push registration to avoid blocking initial render
-// TODO: Replace with real userId from your auth/session
-const userId = localStorage.getItem('userId') || 'demo-user';
+const userId = localStorage.getItem('userId');
 const defer = (fn: () => void) => {
   if ('requestIdleCallback' in window) {
     (window as any).requestIdleCallback(fn, { timeout: 5000 });
@@ -23,7 +22,9 @@ const defer = (fn: () => void) => {
     setTimeout(fn, 0);
   }
 };
-defer(() => registerForPush(userId));
+if (userId) {
+  defer(() => registerForPush(userId));
+}
 
 // Register Service Worker for offline/PWA & background sync
 if ('serviceWorker' in navigator) {

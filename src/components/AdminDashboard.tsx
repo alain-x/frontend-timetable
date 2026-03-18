@@ -1405,8 +1405,18 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
       });
     }
 
-    const responseData = await response.json().catch(() => null);
-    console.log('API Response:', responseData); // Debug log
+    let responseData: any = null;
+    let responseText: string | null = null;
+    try {
+      responseData = await response.json();
+    } catch {
+      try {
+        responseText = await response.text();
+      } catch {
+        responseText = null;
+      }
+    }
+    console.log('API Response:', responseData ?? responseText); // Debug log
 
     if (response.ok) {
       setMessage({
@@ -1424,9 +1434,16 @@ const handleCourseSubmit = async (e: React.FormEvent) => {
       });
       fetchCourses();
     } else {
+      const statusMsg = response.status ? ` (HTTP ${response.status})` : '';
+      const backendMsg =
+        (responseData && (responseData.message || responseData.error)) ||
+        (typeof responseText === 'string' && responseText.trim() ? responseText.trim() : null);
+      const fallbackMsg = response.status === 403
+        ? 'Not authorized to create/update course. Please login as ADMIN.'
+        : (editingCourse ? 'Failed to update course' : 'Failed to create course');
       setMessage({
         type: 'error',
-        text: (responseData && (responseData.message || responseData.error)) || (editingCourse ? 'Failed to update course' : 'Failed to create course')
+        text: `${(backendMsg || fallbackMsg)}${statusMsg}`
       });
     }
   } catch (error) {

@@ -91,11 +91,11 @@ const CourseModal: React.FC<Props> = ({
                 value={courseForm.course_credit}
                 onChange={(e) => setCourseForm({ ...courseForm, course_credit: Number(e.target.value) })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                min={1}
+                min={10}
                 max={30}
                 required
               />
-              <p className="text-xs text-gray-500 dark:text-neutral-400 mt-1">Enter credit hours (1-30)</p>
+              <p className="text-xs text-gray-500 dark:text-neutral-400 mt-1">Enter credit hours (10-30)</p>
             </div>
 
             <div>
