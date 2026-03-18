@@ -110,6 +110,12 @@ self.addEventListener('fetch', (event) => {
   // Backend API runtime strategy
   const isApi = /\/api\//.test(url.pathname) || url.hostname.includes('onrender.com');
   if (isApi) {
+    // Don't intercept cross-origin API calls (e.g. Railway backend). Let the browser handle CORS/network.
+    if (url.origin !== self.location.origin) {
+      event.respondWith(fetch(req));
+      return;
+    }
+
     // Network-first for GET, queue writes when offline
     if (req.method === 'GET') {
       event.respondWith(
